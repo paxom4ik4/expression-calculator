@@ -5,29 +5,20 @@ function eval() {
 
 function expressionCalculator(expr) {
 
-    expr = expr.replace(/ /g, '')
-    const bracketLeft;
-    const bracketRight; 
-
-    if(expr.match(/\(/g) === null) bracketLeft = 0
-    else bracketLeft = expr.match(/\(/g).length
-
-    if(expr.match(/\)/g) === null) bracketRight = 0 
-    else bracketRight = expr.match(/\)/g).length;
-
-
-    const isPaired = bracketLeft === bracketRight
-
-    if (!isPaired) {
-        throw new Error("ExpressionError: Brackets must be paired")
+    if (/\/ 0/.test(expr)) {
+        throw new Error ('TypeError: Division by zero.');
     }
-
-    if ( expr.includes("/0") ) {
-        throw new Error("TypeError: Division by zero.");
+    let brackets = expr.split('').filter(x => x === '(' || x === ')').join('');
+    let Length = 0;
+    do {
+        Length = brackets.length;
+        brackets = brackets.replace('()', '');
+    } while (Length != brackets.length)
+    if (brackets.length > 0) {
+        throw new Error('ExpressionError: Brackets must be paired');
     }
-
-    return new Function("return " + expr)()
-
+    let func = new Function("return " + expr);
+    return func();
 }
 
 
