@@ -4,7 +4,7 @@ function eval() {
 }
 
 function expressionCalculator(expr) {
-    const operators = {
+    const operator = {
     '+': (a, b) => a + b,
     '-': (a, b) => a - b,
     '*': (a, b) => a * b,
@@ -17,7 +17,7 @@ function calculate(expr) {
     function calc(n1, n2) {
         for (let i = 1; i < newExpr.length - 1; i++) {
             if (newExpr[i] == n1 || newExpr[i] == n2) {
-                newExpr[i] = operators[newExpr[i]](+newExpr[i - 1], +newExpr[i + 1]);
+                newExpr[i] = operator[newExpr[i]](+newExpr[i - 1], +newExpr[i + 1]);
                 newExpr.splice(i - 1, 3, newExpr[i]);
                 i--;
             }
